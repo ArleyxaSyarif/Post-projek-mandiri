@@ -21,12 +21,23 @@
             </div>
 
             <nav class="space-y-2 flex-1">
-                <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Home</a>
+                <a href="{{ route('admin.index')    }}" class="block px-4 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Home</a>
+                                <a href="{{ route('kategori.index') }}" class="block px-4 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Kategori System</a>
                 <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Content Control</a>
                 <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Statistik</a>
                 <a href="#" class="block px-4 py-2.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">Pengumuman</a>
             </nav>
 
+              <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+
+                            <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                        
             <button id="theme-toggle" class="mt-auto flex items-center justify-center p-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:ring-2 ring-blue-500 transition-all duration-300">
                 <span id="theme-toggle-light-icon" class="hidden dark:block text-yellow-400">☀️ Light Mode</span>
                 <span id="theme-toggle-dark-icon" class="block dark:hidden text-slate-700">🌙 Dark Mode</span>
