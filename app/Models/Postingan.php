@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Postingan extends Model
 {
@@ -15,6 +16,15 @@ class Postingan extends Model
        'kategori_id',
        'status',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($postingan) {
+            $postingan->slug = Str::slug($postingan->judul);
+        });
+    }
 
     public function kategori()
     {

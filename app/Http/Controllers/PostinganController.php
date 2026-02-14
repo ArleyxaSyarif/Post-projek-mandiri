@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Postingan;
 use Illuminate\Http\Request;
+use App\Models\Kategori;
+use Illuminate\Support\Str;
 
 class PostinganController extends Controller
 {
@@ -12,7 +14,8 @@ class PostinganController extends Controller
      */
     public function index()
     {
-        //
+        $postingan = Postingan::all();
+        return view('postingan.index', compact('postingan'));
     }
 
     /**
@@ -20,16 +23,38 @@ class PostinganController extends Controller
      */
     public function create()
     {
-        //
+        $kategori = Kategori::all();
+        return view('postingan.create', compact('kategori'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+public function store(Request $request)
+{
+    $request->validate([
+        'judul' => 'required|max:255',
+        'gambar' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+        'deskripsi' => 'required',
+        'kategori_id' => 'required|exists:kategoris,id',
+    ]);
+
+$gambar = $request->file('gambar');
+$namaGambar = Str::uuid().'.'.$gambar->getClientOriginalExtension();
+$gambar->storeAs('storage', $namaGambar, 'public');
+
+    Postingan::create([
+        'judul' => $request->judul,
+        'gambar' => $namaGambar,
+        'deskripsi' => $request->deskripsi,
+        'penulis' => auth()->user()->name,
+        'kategori_id' => $request->kategori_id,
+        'status' => 'pending',
+    ]);
+
+    return redirect()->route('postingan.index')
+        ->with('success','Postingan dikirim & menunggu approval admin');
+}
 
     /**
      * Display the specified resource.

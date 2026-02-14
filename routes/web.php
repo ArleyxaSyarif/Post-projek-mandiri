@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PostinganController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,6 +14,10 @@ Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+    Route::get('/postingan', [PostinganController::class, 'index'])->name('postingan.index');
+    Route::get('/postingan/create', [PostinganController::class, 'create'])->name('postingan.create');
+    Route::post('/postingan', [PostinganController::class, 'store'])->name('postingan.store');
+ 
 });
 
 Route::middleware('auth')->group(function () {

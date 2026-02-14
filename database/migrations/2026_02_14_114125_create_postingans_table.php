@@ -16,10 +16,10 @@ return new class extends Migration
             $table->string('judul');
             $table->string('gambar');
             $table->string('deskripsi');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('penulis');
             $table->foreignId('kategori_id')->constrained('kategoris')->onDelete('cascade');
-            $table->string('status');
+            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }
