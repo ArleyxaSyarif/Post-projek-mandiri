@@ -41,7 +41,7 @@ public function store(Request $request)
 
 $gambar = $request->file('gambar');
 $namaGambar = Str::uuid().'.'.$gambar->getClientOriginalExtension();
-$gambar->storeAs('storage', $namaGambar, 'public');
+$gambar->storeAs('postingan', $namaGambar, 'public');
 
     Postingan::create([
         'judul' => $request->judul,

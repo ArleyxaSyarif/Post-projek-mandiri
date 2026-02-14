@@ -17,7 +17,7 @@
                 <div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all duration-300">
                     
                     <div class="relative aspect-video overflow-hidden">
-                        <img src="{{ asset('storage/' . $item->gambar) }}" 
+                        <img src="{{ asset('storage/postingan/' . $item->gambar) }}" 
                              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         
                         <div class="absolute top-3 left-3">
