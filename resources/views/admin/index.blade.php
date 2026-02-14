@@ -22,7 +22,11 @@
                         <td class="px-4 py-2 border-b border-gray-300">{{ $user->email }}</td>
                             <td class="px-4 py-2 border-b border-gray-300 {{ $user->role === 'admin' ? 'bg-green-500 text-white' : 'bg-red-500 text-white' }}">{{ $user->role }}</td>
                         <td class="px-4 py-2 border-b border-gray-300">
-                          
+                            <form action="{{ route('admin.destroy', $user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
